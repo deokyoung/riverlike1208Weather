@@ -8,10 +8,32 @@ const weatherDesc = document.getElementById('weather-desc');
 const humidity = document.getElementById('humidity');
 const windSpeed = document.getElementById('wind-speed');
 
+// 도시 이름 매핑 객체 추가
+const cityMapping = {
+    '서울': 'Seoul',
+    '부산': 'Busan',
+    '인천': 'Incheon',
+    '대구': 'Daegu',
+    '대전': 'Daejeon',
+    '광주': 'Gwangju',
+    '울산': 'Ulsan',
+    '세종': 'Sejong',
+    '제주': 'Jeju',
+    '수원': 'Suwon',
+    '창원': 'Changwon',
+    '고양': 'Goyang',
+    '용인': 'Yongin',
+    '성남': 'Seongnam',
+    '청주': 'Cheongju'
+};
+
 async function getWeatherData(city) {
     try {
+        // 한국어 도시명을 영어로 변환
+        const englishCity = cityMapping[city] || city;
+        
         const response = await fetch(
-            `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`
+            `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${englishCity}&aqi=no`
         );
         const data = await response.json();
         
